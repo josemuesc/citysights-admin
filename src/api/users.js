@@ -1,6 +1,10 @@
 import api from './axios'
 
-export const getUsers = (params) => api.get('/users', { params })
-export const getUser = (id) => api.get(`/users/${id}`)
-export const updateUser = (id, data) => api.put(`/users/${id}`, data)
-export const deleteUser = (id) => api.delete(`/users/${id}`)
+export const getUsers = (params) =>
+  api.get('/admin/users', { params })
+
+export const updateUserRole = (id, role) =>
+  api.put(`/admin/users/${id}/role`, { role })
+
+export const toggleUserActive = (id) =>
+  api.put(`/admin/users/${id}/toggle`)

@@ -1,16 +1,29 @@
-# React + Vite
+# CitySights Admin
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Panel de administración para CitySights — React 18 + Vite + Tailwind CSS.
 
-Currently, two official plugins are available:
+## Desarrollo local
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install
+cp .env.example .env.local   # ajusta VITE_API_URL
+npm run dev
+```
 
-## React Compiler
+Variable de entorno requerida:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Variable       | Ejemplo                           | Descripción                          |
+|----------------|-----------------------------------|--------------------------------------|
+| `VITE_API_URL` | `http://localhost:3000/api/v1`    | URL base de la API (sin barra final) |
 
-## Expanding the ESLint configuration
+## Deploy en Vercel
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Conectar el repositorio en [vercel.com](https://vercel.com) → **Add New Project**.
+2. Seleccionar el directorio `citysights-admin` como **Root Directory** (si el repo es un monorepo).
+3. Framework: **Vite**.
+4. Build command: `npm run build`.
+5. Output directory: `dist`.
+6. Agregar la variable de entorno `VITE_API_URL` con la URL de producción de la API (ej. `https://citysights-api.up.railway.app/api/v1`).
+7. Click **Deploy**.
+
+El archivo `vercel.json` en la raíz ya contiene la regla de rewrite necesaria para que React Router funcione correctamente en producción.

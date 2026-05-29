@@ -2,21 +2,21 @@ import Spinner from './Spinner'
 
 export default function Table({ columns, data, loading, emptyMessage = 'No hay datos.' }) {
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto rounded-xl border border-[var(--border)]">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b border-[var(--border)]">
+          <tr className="bg-[var(--green-dark)]">
             {columns.map((col) => (
               <th
                 key={col.key}
-                className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider"
+                className="text-left px-4 py-3 text-xs font-semibold text-white/80 uppercase tracking-wider whitespace-nowrap"
               >
                 {col.label}
               </th>
             ))}
           </tr>
         </thead>
-        <tbody>
+        <tbody className="bg-white">
           {loading ? (
             <tr>
               <td colSpan={columns.length} className="py-12 text-center">
@@ -33,7 +33,7 @@ export default function Table({ columns, data, loading, emptyMessage = 'No hay d
             data?.map((row, i) => (
               <tr
                 key={row.id ?? i}
-                className="border-b border-[var(--border)] hover:bg-[var(--cream)] transition-colors"
+                className="border-t border-[var(--border)] hover:bg-[var(--cream)] transition-colors"
               >
                 {columns.map((col) => (
                   <td key={col.key} className="px-4 py-3">
