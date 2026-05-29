@@ -26,4 +26,10 @@ Variable de entorno requerida:
 6. Agregar la variable de entorno `VITE_API_URL` con la URL de producción de la API (ej. `https://citysights-api.up.railway.app/api/v1`).
 7. Click **Deploy**.
 
+Nota: Para futuros deploys, si haces cambios y necesitas redesplegar, ejecuta: 
+
+cd citysights-admin
+# edita .vercel/.env.production.local -> VITE_API_URL="https://citysights-api-develop.up.railway.app/api/v1"
+npx vercel build --prod && npx vercel deploy --prebuilt --prod
+
 El archivo `vercel.json` en la raíz ya contiene la regla de rewrite necesaria para que React Router funcione correctamente en producción.
