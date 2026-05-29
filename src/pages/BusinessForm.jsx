@@ -345,7 +345,7 @@ export default function BusinessForm() {
               />
             </Field>
 
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
               <p className="text-xs text-gray-400">
                 Escribe la dirección y el barrio, luego haz clic en el botón para obtener
                 las coordenadas automáticamente.
@@ -356,13 +356,13 @@ export default function BusinessForm() {
                 size="sm"
                 loading={isGeocoding}
                 onClick={geocodeAddress}
-                className="ml-4 shrink-0"
+                className="shrink-0 w-full sm:w-auto"
               >
                 Obtener coordenadas
               </Button>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Field label="Latitud" error={errors.latitude?.message}>
                 <input
                   type="number"
@@ -523,7 +523,7 @@ export default function BusinessForm() {
                     : 'border-[var(--border)] hover:border-[var(--green)] hover:bg-[var(--green-light)]'
                 }`}
               >
-                <input {...getInputProps()} />
+                <input {...getInputProps()} capture="environment" />
                 <p className="text-sm text-gray-500">
                   {isDragActive
                     ? 'Suelta las imágenes aquí...'

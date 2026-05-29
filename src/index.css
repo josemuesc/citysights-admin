@@ -27,3 +27,9 @@ body {
 #root {
   min-height: 100vh;
 }
+
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none;
+  }
+}

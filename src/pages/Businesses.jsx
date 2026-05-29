@@ -115,29 +115,29 @@ export default function Businesses() {
   return (
     <>
       {/* Top bar */}
-      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <form onSubmit={handleSearch} className="flex gap-2 flex-1 max-w-md">
-          <input
-            type="text"
-            placeholder="Buscar negocio..."
-            value={searchInput}
-            onChange={(e) => {
-                setSearchInput(e.target.value)
-                if (!e.target.value) {
-                  setSearch('')
-                  setOffset(0)
-                }
-              }}
-            className="flex-1 rounded-lg border border-[var(--border)] px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--green-dark)]"
-          />
-          <Button type="submit" size="sm">Buscar</Button>
-        </form>
+      <div className="mb-4 flex flex-col gap-3">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <form onSubmit={handleSearch} className="flex gap-2 flex-1 sm:max-w-md">
+            <input
+              type="text"
+              placeholder="Buscar negocio..."
+              value={searchInput}
+              onChange={(e) => {
+                  setSearchInput(e.target.value)
+                  if (!e.target.value) {
+                    setSearch('')
+                    setOffset(0)
+                  }
+                }}
+              className="flex-1 rounded-lg border border-[var(--border)] px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--green-dark)]"
+            />
+            <Button type="submit" size="sm">Buscar</Button>
+          </form>
 
-        <div className="flex gap-2 items-center">
           <select
             value={category}
             onChange={handleCategory}
-            className="rounded-lg border border-[var(--border)] px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[var(--green-dark)]"
+            className="w-full sm:w-auto rounded-lg border border-[var(--border)] px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[var(--green-dark)]"
           >
             <option value="">Todas las categorías</option>
             {categories.map((cat) => (
@@ -146,11 +146,14 @@ export default function Businesses() {
               </option>
             ))}
           </select>
-
-          <Button onClick={() => navigate('/businesses/new')}>
-            + Nuevo negocio
-          </Button>
         </div>
+
+        <Button
+          onClick={() => navigate('/businesses/new')}
+          className="w-full sm:w-auto sm:self-start"
+        >
+          + Nuevo negocio
+        </Button>
       </div>
 
       {/* Table card */}
@@ -168,16 +171,22 @@ export default function Businesses() {
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-[var(--green-dark)]">
-                {['Imagen', 'Nombre', 'Categoría', 'Verificado', 'Destacado', 'Reseñas', ''].map(
-                  (h) => (
-                    <th
-                      key={h}
-                      className="text-left px-4 py-3 text-xs font-semibold text-white/80 uppercase tracking-wider whitespace-nowrap"
-                    >
-                      {h}
-                    </th>
-                  )
-                )}
+                {[
+                  { label: 'Imagen' },
+                  { label: 'Nombre' },
+                  { label: 'Categoría', hideOnMobile: true },
+                  { label: 'Verificado' },
+                  { label: 'Destacado', hideOnMobile: true },
+                  { label: 'Reseñas', hideOnMobile: true },
+                  { label: '' },
+                ].map((h) => (
+                  <th
+                    key={h.label}
+                    className={`text-left px-4 py-3 text-xs font-semibold text-white/80 uppercase tracking-wider whitespace-nowrap${h.hideOnMobile ? ' hide-mobile' : ''}`}
+                  >
+                    {h.label}
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody className="bg-white">
@@ -223,7 +232,7 @@ export default function Businesses() {
                     </td>
 
                     {/* Categoría */}
-                    <td className="px-4 py-3">
+                    <td className="px-4 py-3 hide-mobile">
                       <Badge variant="gray">{b.category?.name || '—'}</Badge>
                     </td>
 
@@ -244,7 +253,7 @@ export default function Businesses() {
                     </td>
 
                     {/* Destacado — toggle */}
-                    <td className="px-4 py-3">
+                    <td className="px-4 py-3 hide-mobile">
                       <button
                         onClick={() =>
                           featureMutation.mutate({ id: b.id, featured: !b.is_featured })
@@ -260,7 +269,7 @@ export default function Businesses() {
                     </td>
 
                     {/* Reseñas */}
-                    <td className="px-4 py-3 text-gray-600">{b.total_reviews ?? 0}</td>
+                    <td className="px-4 py-3 text-gray-600 hide-mobile">{b.total_reviews ?? 0}</td>
 
                     {/* Acciones */}
                     <td className="px-4 py-3">

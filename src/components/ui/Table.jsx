@@ -9,7 +9,7 @@ export default function Table({ columns, data, loading, emptyMessage = 'No hay d
             {columns.map((col) => (
               <th
                 key={col.key}
-                className="text-left px-4 py-3 text-xs font-semibold text-white/80 uppercase tracking-wider whitespace-nowrap"
+                className={`text-left px-4 py-3 text-xs font-semibold text-white/80 uppercase tracking-wider whitespace-nowrap${col.hideOnMobile ? ' hide-mobile' : ''}`}
               >
                 {col.label}
               </th>
@@ -36,7 +36,7 @@ export default function Table({ columns, data, loading, emptyMessage = 'No hay d
                 className="border-t border-[var(--border)] hover:bg-[var(--cream)] transition-colors"
               >
                 {columns.map((col) => (
-                  <td key={col.key} className="px-4 py-3">
+                  <td key={col.key} className={`px-4 py-3${col.hideOnMobile ? ' hide-mobile' : ''}`}>
                     {col.render ? col.render(row) : row[col.key]}
                   </td>
                 ))}

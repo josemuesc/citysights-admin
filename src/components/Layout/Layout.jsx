@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import Sidebar from './Sidebar'
 import Header from './Header'
@@ -12,6 +13,7 @@ const routeMap = {
 
 export default function Layout() {
   const { pathname } = useLocation()
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const matchEdit = pathname.match(/^\/businesses\/(.+)\/edit$/)
   let meta = routeMap[pathname]
@@ -22,10 +24,14 @@ export default function Layout() {
 
   return (
     <div className="flex min-h-screen">
-      <Sidebar />
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <Header title={meta.title} breadcrumb={meta.breadcrumb} />
-        <main className="flex-1 overflow-y-auto p-8 bg-[var(--cream)]">
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <div className="flex-1 flex flex-col overflow-hidden min-w-0">
+        <Header
+          title={meta.title}
+          breadcrumb={meta.breadcrumb}
+          onMenuOpen={() => setSidebarOpen(true)}
+        />
+        <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-[var(--cream)]">
           <Outlet />
         </main>
       </div>
